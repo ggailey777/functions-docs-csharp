@@ -1,16 +1,14 @@
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Azure.Functions.Worker.Configuration;
 
-namespace tempy
+namespace My.Functions
 {
     public class Program
     {
         public static void Main()
         {
             var host = new HostBuilder()
-                .ConfigureFunctionsWorkerDefaults()
+                .ConfigureFunctionsWebApplication()
                 .Build();
 
             host.Run();
