@@ -1,7 +1,5 @@
-using Microsoft.Azure.Functions.Worker.Configuration;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Hosting;
-using System.Threading.Tasks;
 
 namespace FunctionApp10
 {
@@ -10,7 +8,7 @@ namespace FunctionApp10
         public static void Main()
         {
             var host = new HostBuilder()
-                .ConfigureFunctionsWorkerDefaults()
+                .ConfigureFunctionsWebApplication()
                 .Build();
 
             host.Run();

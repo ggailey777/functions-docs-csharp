@@ -1,26 +1,24 @@
-using System.Collections.Generic;
-using System.Net;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
-using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
 
 namespace FunctionApp10
 {
-    public static class HttpExample
+    public class HttpExample
     {
-        [Function("HttpExample")]
-        public static HttpResponseData Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req,
-            FunctionContext executionContext)
+        private readonly ILogger<HttpExample> _logger;
+
+        public HttpExample(ILogger<HttpExample> logger)
         {
-            var logger = executionContext.GetLogger("HttpExample");
-            logger.LogInformation("C# HTTP trigger function processed a request.");
+            _logger = logger;
+        }
 
-            var response = req.CreateResponse(HttpStatusCode.OK);
-            response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
-
-            response.WriteString("Welcome to Azure Functions!");
-
-            return response;
+        [Function("HttpExample")]
+        public IActionResult Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequest req)
+        {
+            _logger.LogInformation("C# HTTP trigger function processed a request.");
+            return new OkObjectResult("Welcome to Azure Functions!");
         }
     }
 }

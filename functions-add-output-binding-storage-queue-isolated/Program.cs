@@ -1,7 +1,5 @@
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Azure.Functions.Worker.Configuration;
 
 namespace functions_add_output_binding_storage_queue_isolated
 {
@@ -10,7 +8,7 @@ namespace functions_add_output_binding_storage_queue_isolated
         public static void Main()
         {
             var host = new HostBuilder()
-                .ConfigureFunctionsWorkerDefaults()
+                .ConfigureFunctionsWebApplication()
                 .Build();
 
             host.Run();
